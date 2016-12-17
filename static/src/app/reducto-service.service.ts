@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from "rxjs/Observable";
+import {DOCUMENT} from '@angular/platform-browser';
 
 @Injectable()
 export class ReductoService {
 
-  constructor(public http: Http) { }
+  constructor(public http: Http,@Inject(DOCUMENT) private document) { }
 
   public getUrlSummary(url: string){
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-    let myUrl = "http://localhost:8788/api/summarize/summarize"+encodeURI("?url="+url);
+    let myUrl = document.location.protocol +'//'+ document.location.hostname+"/api/summarize/summarize"+encodeURI("?url="+url);
     return this.http.get(myUrl, headers).map(res => res.json())
   }
 
