@@ -1,0 +1,101 @@
+<span defaultOverlayTarget></span>
+<div class="container-fluid ">
+  <h1 class="display-1 text-left">Reducto</h1>
+  <div class="col-md-10 col-md-offset-1">
+    <div class="row">
+      <p class="lead">A text summary tool for quickly building multi-article summaries that are pastable into word, outlook and other applications </p>
+    </div>
+
+
+    <div class="row top-buffer ">
+      <span class="text-danger" *ngIf="error"><strong>{{errorMessage}}</strong></span>
+      <div class="input-group form-group"  [ngClass]="{'has-error':error}">
+        <input type="text" class="form-control" placeholder="Article Url" [(ngModel)]="url">
+        <span class="input-group-btn">
+              <button class="btn btn-primary" type="button"  (click)="newArticle()" [disabled]="loading">Load</button>
+          </span>
+      </div>
+    </div>
+
+    <div class ="row top-buffer bottom-buffer">
+      <div *ngIf="loading" style="display: block; text-align: center;">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      </div>
+    </div>
+
+    <div class ="row top-buffer">
+      <div  *ngFor="let summary of articles; let articleIndex = index"  class="row bottom-buffer">
+        <ngb-accordion #acc="ngbAccordion" [hidden]="articleIndex==0"> <!-- Stupid shit because ngb-accordion is crap -->
+          <!-- For Each Added Article -->
+          <ngb-panel>
+            <template ngbPanelTitle>
+                  <span>
+                    <strong>{{summary.website}}</strong>:&nbsp;&nbsp;{{summary.title}}
+                    <i class="fa fa-times close-button-right" aria-hidden="true"  (click)="deleteArticle(articleIndex)"></i>
+                  </span>
+            </template>
+            <template ngbPanelContent>
+              <div class="col-md-12">
+                <!-- Summary Pulled Left -->
+                <div class="row">
+                  <div class="col-md-7">
+                    <p>{{summary.summary}}</p>
+                  </div>
+
+                   <!--Pull Right Carousel (image selector) -->
+                  <div class="col-md-5" *ngIf="summary.images.length > 0">
+                    <div class="row">
+                      <label>
+                        <strong>Show Images&nbsp;&nbsp;</strong>
+                        <input type="checkbox"  [(ngModel)]="summary.showImage">
+                      </label>
+                    </div>
+
+                    <div class="row" *ngIf="summary.showImage">
+                      <div id="base-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                          <div class="col-md-8 col-centered">
+                            <div *ngFor="let img of summary.images; let i = index" class="carousel-item"
+                                 [ngClass]="{'active':i==summary.selected}">
+                              <img *ngIf="i==summary.selected" src="{{img}}" style="width:100%;">
+                            </div>
+                          </div>
+                        </div>
+
+                        <a class="left carousel-control" role="button" (click)="summary.left()">
+                          <span class="icon-prev" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" role="button" (click)="summary.right()">
+                          <span class="icon-next" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+              </div>
+            </template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+    </div>
+
+    <!--<div class="row">-->
+      <!--<textarea class="form-control" rows="5" [(ngModel)]="html"></textarea>-->
+    <!--</div>-->
+    <div class="row top-buffer">
+      <!--<button class="btn btn-primary" type="button" [ngCopy]="html" [ngCopyType]="'text/html'">Copy Test</button>-->
+      <button class="btn btn-primary" type="button" [disabled]="articles.length<2" (click)="generateSummaries()" >View Copyable Results</button>
+    </div>
+
+
+
+
+
+  </div>
+</div>

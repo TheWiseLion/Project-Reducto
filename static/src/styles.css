@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+
+@media all {
+
+  .modal-dialog.modal-lg{
+    width: 95%;
+  }
+}
+
+/*.modal-lg{*/
+/*!important width: 95%;*/
+/*}*/
+
+.modal-title{
+  font-size: xx-large;
+}
+
+/*.modal-header{*/
+  /*background-color: #219161;*/
+  /*color: #fff;*/
+  /*-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);*/
+  /*-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);*/
+  /*box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);*/
+/*}*/
+
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
+.close-button-right{
+  font-size: x-large;
+  float: right;
+  color: #373a3c;
+}
+
+.top-buffer { margin-top:20px; }
+.bottom-buffer { margin-top:20px; }
+
+.close-button-right:hover{
+  color: #d9534f;
+}
+
+
+.card {
+  /* position: relative; */
+  /* display: block; */
+  /* margin-bottom: .75rem; */
+  /* background-color: #fff; */
+  /* border-radius: .25rem; */
+  /* border: 1px solid rgba(0,0,0,.125); */
+  background-color: inherit;
+  /* border-radius: initial; */
+  border: none;
+}
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: #f5f5f5;
+  border: 1px solid rgba(0,0,0,.125);
+}
+.card-block {
+  padding: 1.25rem;
+  border: 1px solid rgba(0,0,0,.125);
+}
+

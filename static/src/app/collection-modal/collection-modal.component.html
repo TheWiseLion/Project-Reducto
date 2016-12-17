@@ -1,0 +1,19 @@
+<div class="container-fluid custom-modal-container">
+  <div class="row custom-modal-header">
+    <div class="col-sm-12">
+      <h1>Final Email Ready Article Summary</h1>
+    </div>
+  </div>
+  <div class="row">
+  <!-- TODO: Stuff goes here -->
+    <div #dataContainer></div>
+
+  </div>
+
+  <div class="modal-footer text-center">
+    <button type="button" class="btn btn-danger"  (click)="onClose()">Close</button>
+    <button type="button" class="btn btn-success" [ngCopy]="context.email_html" [ngCopyType]="'text/html'">Copy</button>
+  </div>
+
+</div>
+
