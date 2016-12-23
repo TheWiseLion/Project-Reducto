@@ -6,14 +6,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from api.api import rest_api
 
-import logging.config
-
 
 # Requirments: sumy 0.5.1, flask, flask restplus,
 
 app = Flask(__name__)
-logging.config.fileConfig('logging.conf')
-log = logging.getLogger(__name__)
 
 file_blueprint = Blueprint('static_files',__name__, url_prefix='/site')
 @file_blueprint.route('/<path:path>')
@@ -50,7 +46,7 @@ def initialize_app(flask_app):
 
 def main():
     initialize_app(app)
-    log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
+#    log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     print app.url_map
     app.run(debug=api.settings.FLASK_DEBUG,port=80)
 
