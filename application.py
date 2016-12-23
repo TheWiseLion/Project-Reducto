@@ -9,14 +9,16 @@ from api.api import rest_api
 
 # Requirments: sumy 0.5.1, flask, flask restplus,
 
-app = Flask(__name__)
-application = app
+application = Flask(__name__)
 
 file_blueprint = Blueprint('static_files',__name__, url_prefix='/site')
 @file_blueprint.route('/<path:path>')
 def files(path):
     return send_from_directory('static/dist', path)
 
+@application.route('/')
+def empty_route():
+    return send_from_directory('static/dist', "index.html")
 
 def configure_app(flask_app):
     # flask_app.config['SERVER_NAME'] = api.settings.FLASK_SERVER_NAME
@@ -41,10 +43,10 @@ def initialize_app(flask_app):
 
 
 def main():
-    initialize_app(app)
+    initialize_app(application)
 #    log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
-    print app.url_map
-    app.run(debug=api.settings.FLASK_DEBUG,port=80)
+    print application.url_map
+    application.run(debug=api.settings.FLASK_DEBUG,port=80)
 
 
 
