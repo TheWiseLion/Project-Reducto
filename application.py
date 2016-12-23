@@ -12,15 +12,11 @@ from api.api import rest_api
 application = app = Flask(__name__)
 
 file_blueprint = Blueprint('static_files',__name__, url_prefix='/site')
+@app.route('/', defaults={'path': '/site/index.html'})
 @file_blueprint.route('/<path:path>')
 def files(path):
     return send_from_directory('static/dist', path)
 
-# Default Route
-@app.route('/', defaults={'path': '/site/index.html'})
-@app.route('/<path:path>')
-def catch_all(path):
-    return send_from_directory('static/dist', "index.html")
 
 def configure_app(flask_app):
     # flask_app.config['SERVER_NAME'] = api.settings.FLASK_SERVER_NAME
