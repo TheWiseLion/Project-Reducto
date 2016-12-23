@@ -4,7 +4,7 @@ import api.settings
 from flask import Flask, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from api.api import api
+from api.api import rest_api
 
 import logging.config
 
@@ -34,7 +34,7 @@ def configure_app(flask_app):
 def initialize_app(flask_app):
     configure_app(flask_app)
     blueprint = Blueprint('api', __name__, url_prefix='/api')
-    api.init_app(blueprint)
+    rest_api.init_app(blueprint)
     CORS(blueprint, resources={r"/api/*": {"origins": "*"}})
     flask_app.register_blueprint(blueprint)
     flask_app.register_blueprint(file_blueprint)

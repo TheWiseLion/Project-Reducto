@@ -6,27 +6,26 @@ import validators
 from flask_restplus import Resource
 from flask_restplus import abort
 from flask_restplus import fields
+
 import utils
-import settings
 from flask_restplus import Api
 
-api = Api(version='1.0', title='reducto-api', description='Basic Services')
+rest_api = Api(version='1.0', title='reducto-api', description='Basic Services')
 
 log = logging.getLogger(__name__)
-@api.errorhandler
+@rest_api.errorhandler
 def default_error_handler(e):
     message = 'An unhandled exception occurred.'
     log.exception(message)
 
-    if not settings.FLASK_DEBUG:
-        return {'message': message}, 500
+    return {'message': message}, 500
 
 
-summarize = api.namespace('summarize', description='Summarize Operations')
+summarize = rest_api.namespace('summarize', description='Summarize Operations')
 parser = summarize.parser()
 parser.add_argument('url', type=str, help='url for summery and images')
 
-summary = api.model('ScrapingResults', {
+summary = rest_api.model('ScrapingResults', {
     'images': fields.List(fields.String(description='Urls to images for site')),
     'summary': fields.String(required=True, description='summary for article'),
     'website': fields.String(required=True, description='summary for article'),
