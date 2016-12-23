@@ -15,16 +15,19 @@ app = Flask(__name__)
 logging.config.fileConfig('logging.conf')
 log = logging.getLogger(__name__)
 
-file_blueprint = Blueprint('static_files',__name__,
-                           url_prefix='/site')
+file_blueprint = Blueprint('static_files',__name__, url_prefix='/site')
 @file_blueprint.route('/<path:path>')
 def files(path):
-    print path
-    return send_from_directory('../static/dist', path)
+    return send_from_directory('static/dist', path)
 
+# Default Route
+@app.route('/', defaults={'path': '/site/index.html'})
+@app.route('/<path:path>')
+def catch_all(path):
+    return send_from_directory('static/dist', "index.html")
 
 def configure_app(flask_app):
-    flask_app.config['SERVER_NAME'] = api.settings.FLASK_SERVER_NAME
+    # flask_app.config['SERVER_NAME'] = api.settings.FLASK_SERVER_NAME
     flask_app.config['SWAGGER_UI_DOC_EXPANSION'] = api.settings.RESTPLUS_SWAGGER_UI_DOC_EXPANSION
     flask_app.config['RESTPLUS_VALIDATE'] = api.settings.RESTPLUS_VALIDATE
     flask_app.config['RESTPLUS_MASK_SWAGGER'] = api.settings.RESTPLUS_MASK_SWAGGER
@@ -36,8 +39,11 @@ def initialize_app(flask_app):
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     rest_api.init_app(blueprint)
     CORS(blueprint, resources={r"/api/*": {"origins": "*"}})
-    flask_app.register_blueprint(blueprint)
+    print "File Blue Print:\n"
+    print file_blueprint
     flask_app.register_blueprint(file_blueprint)
+    flask_app.register_blueprint(blueprint)
+
 
 
 
@@ -46,7 +52,7 @@ def main():
     initialize_app(app)
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     print app.url_map
-    app.run(debug=api.settings.FLASK_DEBUG)
+    app.run(debug=api.settings.FLASK_DEBUG,port=80)
 
 
 
