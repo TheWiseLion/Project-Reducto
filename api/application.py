@@ -1,7 +1,6 @@
 from flask import send_from_directory
 
 import settings
-from database.config import db
 from flask import Flask, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS

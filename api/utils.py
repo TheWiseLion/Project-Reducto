@@ -5,14 +5,6 @@ import urllib2
 import html2text
 import io
 from BeautifulSoup import BeautifulSoup
-from sumy.parsers.plaintext import PlaintextParser #We're choosing a plaintext parser here, other parsers available for HTML etc.
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lex_rank import LexRankSummarizer #We're choosing Lexrank, other algorithms are also built in
-from sumy.summarizers.edmundson import EdmundsonSummarizer
-from sumy.nlp.stemmers import Stemmer
-from sumy.utils import get_stop_words
-from sumy.summarizers.lsa import LsaSummarizer
-
 common_replacement = ["There was an error emailing this page.","Your message has been sent."]
 
 
@@ -174,17 +166,17 @@ def obtain_images(source, minX=600, minY=500):
 
 
 
-def summarize_text(document_text, sentances=3):
-    LANGUAGE = "english"
-    stemmer = Stemmer(LANGUAGE)
-    stopper = get_stop_words(LANGUAGE)
-
-    # summarizer = LsaSummarizer(stemmer)
-    # summarizer.stop_words = stopper
-    parser = PlaintextParser.from_string(document_text, Tokenizer("english"))
-    summarizer = LexRankSummarizer()
-    r = summarizer(parser.document, sentances)
-    return [str(s) for s in r]
+# def summarize_text(document_text, sentances=3):
+#     LANGUAGE = "english"
+#     stemmer = Stemmer(LANGUAGE)
+#     stopper = get_stop_words(LANGUAGE)
+#
+#     # summarizer = LsaSummarizer(stemmer)
+#     # summarizer.stop_words = stopper
+#     parser = PlaintextParser.from_string(document_text, Tokenizer("english"))
+#     summarizer = LexRankSummarizer()
+#     r = summarizer(parser.document, sentances)
+#     return [str(s) for s in r]
 
 # from cookielib import CookieJar
 # cj = CookieJar()
