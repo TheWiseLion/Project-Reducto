@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from api.api import rest_api
 
+# Beanstalk looks for "application" variable
 application = Flask(__name__)
 
 file_blueprint = Blueprint('static_files', __name__, url_prefix='/site')
@@ -17,7 +18,7 @@ def files(path):
 
 
 @application.route('/')
-def empty_route():
+def empty_route():  # Set default route
     return send_from_directory('static/dist', "index.html")
 
 
