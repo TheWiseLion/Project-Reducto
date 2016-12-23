@@ -1,4 +1,8 @@
 **/.idea/**
 .idea/**
 **/static/node_modules/**
-**/*.pyc
+**/*.pyc
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
