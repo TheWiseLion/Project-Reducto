@@ -9,10 +9,10 @@ from api.api import rest_api
 
 # Requirments: sumy 0.5.1, flask, flask restplus,
 
-application = app = Flask(__name__)
+app = Flask(__name__)
+application = app
 
 file_blueprint = Blueprint('static_files',__name__, url_prefix='/site')
-@app.route('/', defaults={'path': '/site/index.html'})
 @file_blueprint.route('/<path:path>')
 def files(path):
     return send_from_directory('static/dist', path)
