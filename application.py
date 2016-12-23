@@ -1,10 +1,10 @@
 from flask import send_from_directory
 
-import settings
+import api.settings
 from flask import Flask, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from api import api
+from api.api import api
 
 import logging.config
 
@@ -24,11 +24,11 @@ def files(path):
 
 
 def configure_app(flask_app):
-    flask_app.config['SERVER_NAME'] = settings.FLASK_SERVER_NAME
-    flask_app.config['SWAGGER_UI_DOC_EXPANSION'] = settings.RESTPLUS_SWAGGER_UI_DOC_EXPANSION
-    flask_app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
-    flask_app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
-    flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
+    flask_app.config['SERVER_NAME'] = api.settings.FLASK_SERVER_NAME
+    flask_app.config['SWAGGER_UI_DOC_EXPANSION'] = api.settings.RESTPLUS_SWAGGER_UI_DOC_EXPANSION
+    flask_app.config['RESTPLUS_VALIDATE'] = api.settings.RESTPLUS_VALIDATE
+    flask_app.config['RESTPLUS_MASK_SWAGGER'] = api.settings.RESTPLUS_MASK_SWAGGER
+    flask_app.config['ERROR_404_HELP'] = api.settings.RESTPLUS_ERROR_404_HELP
 
 
 def initialize_app(flask_app):
@@ -46,7 +46,7 @@ def main():
     initialize_app(app)
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     print app.url_map
-    app.run(debug=settings.FLASK_DEBUG)
+    app.run(debug=api.settings.FLASK_DEBUG)
 
 
 
