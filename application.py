@@ -7,8 +7,6 @@ from flask_cors import CORS
 from api.api import rest_api
 
 
-# Requirments: sumy 0.5.1, flask, flask restplus,
-
 application = Flask(__name__)
 
 file_blueprint = Blueprint('static_files',__name__, url_prefix='/site')
