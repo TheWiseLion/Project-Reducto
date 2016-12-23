@@ -12,6 +12,5 @@ global:
   repository: null
   sc: git
 
-option_settings:
-  aws:elasticbeanstalk:container:python:
-    WSGIPath: api/application.py
+aws:elasticbeanstalk:container:python:
+  WSGIPath: api/application.py
