@@ -9,7 +9,7 @@ from api.api import rest_api
 
 # Requirments: sumy 0.5.1, flask, flask restplus,
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
 file_blueprint = Blueprint('static_files',__name__, url_prefix='/site')
 @file_blueprint.route('/<path:path>')
